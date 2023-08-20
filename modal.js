@@ -25,7 +25,7 @@ function launchModal() {
 
 
 const checkName = (name) => {
-  const nameRegex = /^[a-z]+[ \-']?[[a-z]+[ \-']?]*[a-z]+$/;
+  const nameRegex = /^[A-Za-z][A-Za-z\é\è\ê\-]+$/;
   const nameTest = nameRegex.test(name);
   return nameTest;
 }
@@ -43,29 +43,28 @@ const checkBirthdate = () => {
   const maxYear = (new Date()).getFullYear();
   let errorMsg = "";
 
-  re = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+  // re = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 
-    if(input.value != '') {
-      if(regs = input.value.match(re)) {
-        if(regs[1] < 1 || regs[1] > 31) {
-          errorMsg = "Invalid value for day: " + regs[1];
-        } else if(regs[2] < 1 || regs[2] > 12) {
-          errorMsg = "Invalid value for month: " + regs[2];
-        } else if(regs[3] < minYear || regs[3] > maxYear) {
-          errorMsg = "Invalid value for year: " + regs[3] + " - must be between " + minYear + " and " + maxYear;
-        }
-      } else {
-        errorMsg = "Invalid date format: " + input.value;
-      }
-    }
+  //   if(input.value != '') {
+  //     if(regs = input.value.match(re)) {
+  //       if(regs[1] < 1 || regs[1] > 31) {
+  //         errorMsg = "Invalid value for day: " + regs[1];
+  //       } else if(regs[2] < 1 || regs[2] > 12) {
+  //         errorMsg = "Invalid value for month: " + regs[2];
+  //       } else if(regs[3] < minYear || regs[3] > maxYear) {
+  //         errorMsg = "Invalid value for year: " + regs[3] + " - must be between " + minYear + " and " + maxYear;
+  //       }
+  //     } else {
+  //       errorMsg = "Invalid date format: " + input.value;
+  //     }
+  //   }
 
     return errorMsg;
 }
 
 const checkQuantity = (quantity) => {
   const quantityRegex = /^[0-9]{1,2}$/;
-  const quantityTest = quantityRegex.test(quantity);
-  return quantityTest;
+  return quantityRegex.test(quantity);
 }
 
 
@@ -73,7 +72,6 @@ const checkQuantity = (quantity) => {
 const checkInput = (input) => {
     let errorMessage = '';
     const inputContainer = input.parentElement;
-    console.log(input.value.trim());
   
     // Verifier si le champ est vide
   if (!input.value.trim()) {
@@ -95,6 +93,7 @@ const checkInput = (input) => {
       case "quantity":
         errorMessage = checkQuantity(input.value) ? "" : "Veuillez entrer un nombre entre 0 et 99";
         break;
+      
     }
   }
   // if (errorMessage) {
@@ -104,26 +103,34 @@ const checkInput = (input) => {
   inputContainer.dataset.errorVisible = (!!errorMessage).toString();
 }
 
+
 // Form events
 //ne fonctionne pas avec checkbox et radio
 reserveForm.addEventListener("blur", e => checkInput(e.target), true);
 
 reserveForm.addEventListener("submit", e => {
   let nbCheckedRadio = 0;
-  let agreeConditionsBox = document.getElementById("checkbox1").checked;
+  let nbTextErrors = 0;
   e.preventDefault();
-  formDatas.forEach(box => {
-    if (box.getAttribute("class") === "text-control") {
-      checkInput(box);
-    } else if (box.type === "radio") {
-      nbCheckedRadio += box.checked  ? 1 : 0;
-      box.parentElement.dataset.error = nbCheckedRadio ? "" : "Veuillez choisir une ville";
-      box.parentElement.dataset.errorVisible = !nbCheckedRadio ? "true" : "false";
-    } else if (box.id === "checkbox1") {
-      box.parentElement.dataset.error = agreeConditionsBox ? "" : "Veuillez accepter les conditions d'utilisation";
-      box.parentElement.dataset.errorVisible = !agreeConditionsBox ? "true" : "false";
+  formDatas.forEach(input => {
+
+    if (input.getAttribute("class") === "text-control") {
+      checkInput(input);
+      nbTextErrors += input.parentElement.dataset.error ? 1 : 0;
+    } else if (input.type === "radio") {
+      nbCheckedRadio += input.checked  ? 1 : 0;
+      input.parentElement.dataset.error = nbCheckedRadio ? "" : "Veuillez choisir une ville";
+      input.parentElement.dataset.errorVisible = !nbCheckedRadio ? "true" : "false";
+    } else if (input.id === "checkbox1") {
+      input.parentElement.dataset.error = input.checked ? "" : "Veuillez accepter les conditions d'utilisation";
+      input.parentElement.dataset.errorVisible = !input.checked ? "true" : "false";
     }
   });
+
+  if (nbCheckedRadio && formDatas[formDatas.length - 2].checked && !nbTextErrors) {
+  console.log("everything is ok");
+  document.querySelector('.modal-body').innerHTML = "<h2>Merci !</h2><p>Votre réservation a été reçue.</p><button id='closeModal'>Fermer</button>";
+  }
 });
 
 

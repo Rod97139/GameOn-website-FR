@@ -22,6 +22,10 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+const closeModal = () => {
+  modalbg.style.display = "none";
+};
+
 
 
 const checkName = (name) => {

@@ -33,12 +33,16 @@ img {
 .topnav {
   overflow: hidden;
   margin: 3.5%;
+  display: flex;
+  justify-content: space-between;
 }
 .header-logo {
+  flex-shrink: 0;
     float: left;
 }
 .main-navbar {
     float: right;
+    margin-block: auto;
 }
 .topnav a {
   float: left;
@@ -52,17 +56,27 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topnav a:hover {
+.topnav .nav:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+}
+.topnav .nav:hover span {
+  
+  border-bottom: #ffffff 2px solid;
 }
 
-.topnav a.active {
+.topnav .nav.active {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
+.topnav .nav.active span{
+  
+  border-bottom: #ffffff 2px solid;
+}
+
+
 
 .topnav .icon {
   display: none;
@@ -77,9 +91,15 @@ img {
     margin: 8px 20px;
   }
   .topnav .logo {
-    width: 120px;
-    margin: 20px;
+    width: 150px;
+    /* margin: 20px; */
+    position: absolute;
   }
+
+  .topnav {
+    margin-bottom: 0;
+  }
+ 
   .topnav a.icon:hover {
     background-color: #ff0000;
     color: #ffffff;
@@ -90,11 +110,17 @@ img {
 @media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
-    color: #ffffff;
+    color: #ff0000;
     position: absolute;
     right: 0;
-    top: 0;
+    top:0;
   }
+  .topnav.responsive .main-navbar {
+   /* position: absolute; */
+    margin-top: 80px;
+    flex-shrink: 0;
+  }
+  
   .topnav.responsive a {
     float: none;
     display: block;
@@ -241,7 +267,7 @@ label {
 }
 .modal-body p {
   margin-top: 0.4rem;
-  margin-left: 0rem;
+  margin-left: -1.2%;
   font-size: 0.7rem;
 }
 input {

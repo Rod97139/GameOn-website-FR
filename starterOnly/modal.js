@@ -133,7 +133,7 @@ reserveForm.addEventListener("submit", e => {
 
   if (nbCheckedRadio && formDatas[formDatas.length - 2].checked && !nbTextErrors) {
   console.log("everything is ok");
-  document.querySelector('.modal-body').innerHTML = "<h2>Merci !</h2><p>Votre réservation a été reçue.</p><button id='closeModal'>Fermer</button>";
+  document.querySelector('.modal-body').innerHTML = `<h2 id="modal-thanks">Merci pour votre inscription </h2><a onClick="closeModal()" class="button" id='closeModal'>Fermer</a>`;
   }
 });
 

@@ -161,6 +161,12 @@ main {
   font-size: 16px;
 }
 
+.button#closeModal {
+  border-radius: 10px;
+  padding-inline: 4rem;
+  padding-block: 0.4rem;
+}
+
 .button:hover {
   background: #3876ac;
 }
@@ -196,9 +202,34 @@ main {
   padding-top: 10px;
 }
 
+#modal-thanks {
+  position: absolute;
+  width: 265.5px;
+  text-align: center;
+  top:210px;
+
+
+}
+
+#closeModal {
+  position: relative;
+  top: 470px;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  margin: auto;
+  font-weight: lighter;
+  
+  /* transform: scale(0.6);  */
+
+}
+
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 label {
@@ -324,6 +355,7 @@ input[data-error]::after {
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
+  z-index: 1;
 }
 .close:before,
 .close:after {
@@ -456,7 +488,7 @@ input[data-error]::after {
   z-index: 1;
 }
 .hero-headline {
-  font-size: 6rem;
+  font-size: 5vw;
   font-weight: normal;
   white-space: nowrap;
 }

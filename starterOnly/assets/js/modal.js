@@ -12,6 +12,8 @@ const modalbg = document.querySelector(".bground");
 const reserveForm = document.querySelector("form[name='reserve']");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formDatas = document.querySelectorAll(".formData input");
+const burgerIcon = document.querySelector(".icon");
+const closeIcon = document.querySelector(".close");
 
 
 // launch modal event
@@ -25,6 +27,11 @@ function launchModal() {
 const closeModal = () => {
   modalbg.style.display = "none";
 };
+
+//Burger menu
+
+burgerIcon.addEventListener("click", editNav);
+
 
 
 
@@ -137,6 +144,8 @@ reserveForm.addEventListener("submit", e => {
   document.querySelector('.modal-body').innerHTML = `<h2 id="modal-thanks">Merci pour votre inscription </h2><a onClick="closeModal()" class="button" id='closeModal'>Fermer</a>`;
   }
 });
+
+closeIcon.addEventListener("click", closeModal);
 
 
 

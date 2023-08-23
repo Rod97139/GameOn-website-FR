@@ -61,6 +61,7 @@
               name="reserve"
               action="index.html"
               method="post"
+              novalidate
               
             >
               <div
@@ -71,8 +72,6 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
-                  required
                 /><br>
               </div>
               <div
@@ -83,7 +82,6 @@
                   type="text"
                   id="last"
                   name="last"
-                  required
                 /><br>
               </div>
               <div
@@ -190,7 +188,6 @@
                   type="checkbox"
                   id="checkbox1"
                   name="checkbox1"
-                  checked
                 />
                 <label class="checkbox2-label" for="checkbox1" >
                   <span class="checkbox-icon"></span>

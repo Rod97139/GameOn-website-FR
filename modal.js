@@ -80,6 +80,7 @@ const checkInput = (input) => {
     // Verifier si le champ est vide
   if (!input.value.trim()) {
     errorMessage = "Veuillez renseigner ce champ";
+    //return
     // Si il n'est pas vide, verifier si le format est correct en fonction de l'id de l'input
   } else {
 

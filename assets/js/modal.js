@@ -61,25 +61,22 @@ const checkEmail = () => {
 
 const checkBirthdate = () => {
   const input = document.getElementById("birthdate");
-  const minYear = 1902;
+  const inputDate = input.value.split("-")
+  const minYear = 1871;
   const maxYear = (new Date()).getFullYear();
+  const maxMonth = (new Date()).getMonth() + 1;
   let errorMsg = "";
 
-  // re = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+  
 
-  //   if(input.value != '') {
-  //     if(regs = input.value.match(re)) {
-  //       if(regs[1] < 1 || regs[1] > 31) {
-  //         errorMsg = "Invalid value for day: " + regs[1];
-  //       } else if(regs[2] < 1 || regs[2] > 12) {
-  //         errorMsg = "Invalid value for month: " + regs[2];
-  //       } else if(regs[3] < minYear || regs[3] > maxYear) {
-  //         errorMsg = "Invalid value for year: " + regs[3] + " - must be between " + minYear + " and " + maxYear;
-  //       }
-  //     } else {
-  //       errorMsg = "Invalid date format: " + input.value;
-  //     }
-  //   }
+
+  if (inputDate[0] > maxYear || (inputDate[0] == maxYear && inputDate[1] > maxMonth) || (inputDate[0] == maxYear && inputDate[1] == maxMonth && inputDate[2] > (new Date()).getDate())) {
+    
+    errorMsg = "Vous ne pouvez pas être né dans le futur";    
+  } else if (inputDate[0] < minYear) {
+    
+    errorMsg = "L'année de naissance doit être supérieure à 1870";
+  }
 
     return errorMsg;
 }

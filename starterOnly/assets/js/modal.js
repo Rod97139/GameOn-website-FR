@@ -1,32 +1,43 @@
-const editNav = () => {
-  const x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
+
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
+const topNavElement = document.getElementById("myTopnav");
 const reserveForm = document.querySelector("form[name='reserve']");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formDatas = document.querySelectorAll(".formData input");
 const burgerIcon = document.querySelector(".icon");
 const closeIcon = document.querySelector(".close");
 
+const editNav = () => {
+  
+  if (topNavElement.className === "topnav") {
+    topNavElement.className += " responsive";
+  } else {
+    topNavElement.className = "topnav";
+  }
+}
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
+  topNavElement.className = "topnav";
   modalbg.style.display = "block";
 }
 
 const closeModal = () => {
+  const thanksModal = document.querySelector(".modal-thanks");
+
+  if (thanksModal) {
+    thanksModal.remove();
+    reserveForm.style = "display: block;";
+  }
   modalbg.style.display = "none";
 };
+
+
 
 //Burger menu
 
@@ -140,8 +151,14 @@ reserveForm.addEventListener("submit", e => {
   });
 
   if (nbCheckedRadio && formDatas[formDatas.length - 2].checked && !nbTextErrors) {
-  console.log("everything is ok");
-  document.querySelector('.modal-body').innerHTML = `<h2 id="modal-thanks">Merci pour votre inscription </h2><a onClick="closeModal()" class="button" id='closeModal'>Fermer</a>`;
+    console.log("everything is ok");
+    reserveForm.reset();
+    reserveForm.style = "display: none;";
+    const newDiv = document.createElement("div");
+    newDiv.className = "modal-thanks";
+    newDiv.innerHTML = `<h2 id="title-thanks">Merci pour votre inscription </h2><a onClick="closeModal()" class="button" id='closeModal'>Fermer</a>`;
+
+    document.querySelector('.modal-body').append(newDiv); 
   }
 });
 

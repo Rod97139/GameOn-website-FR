@@ -36,7 +36,7 @@ img {
 }
 
 .topnav {
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: 3.5%;
   display: flex;
   justify-content: space-between;
@@ -61,22 +61,23 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topnav .nav:hover {
+
+.topnav .nav a:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
-.topnav .nav:hover span {
+.topnav .nav a:hover span {
   
   border-bottom: #ffffff 2px solid;
 }
 
-.topnav .nav.active {
+.topnav .nav a.active {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
-.topnav .nav.active span{
+.topnav .nav a.active span{
   
   border-bottom: #ffffff 2px solid;
 }
@@ -88,7 +89,7 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
+  .topnav .nav {display: none;}
   .topnav a.icon {
     color: #ff0000;
     float: right;
@@ -122,15 +123,37 @@ img {
   }
   .topnav.responsive .main-navbar {
    /* position: absolute; */
-    margin-top: 80px;
+    margin-top: 63px;
     flex-shrink: 0;
   }
   
-  .topnav.responsive a {
+  /* .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
+  } */
+
+  .topnav.responsive .nav {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    z-index: 1000;
+    width: 100%;
+    height: 250px;
+    overflow: scroll;
+    background-color: white;
+    border-radius: 20px;
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    
+    top: 61px;
+    left: 0;
+    right: 0;
   }
+
+  
 }
 
 
@@ -233,18 +256,18 @@ main {
   padding-top: 10px;
 }
 
-#modal-thanks {
-  position: absolute;
+
+
+#title-thanks {
   width: 265.5px;
+  margin: auto;
   text-align: center;
-  top:210px;
-
-
+  margin-top: 200px;
 }
 
 #closeModal {
   position: relative;
-  top: 470px;
+  top: 330px;
   display: flex;
   justify-content: center;
   width: 150px;
@@ -414,6 +437,10 @@ input[data-error]::after {
   color: #fff;
   cursor: pointer;
   border: 0;
+}
+
+.btn-submit {
+  margin-top: 1rem;
 }
 /* custom select styles */
 .custom-select {
